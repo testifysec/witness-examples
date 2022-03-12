@@ -1,4 +1,4 @@
-package commandrun.exitcode
+package commandrun
 
 deny[msg] {
 	input.exitcode != 0

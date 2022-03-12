@@ -28,13 +28,28 @@ publickeys:
     key: "{{KEY}}"
 ```
 
+Create a rego policy to ensure that the command is rwhat we expect it to be
 
-Use the following script to template the policy.  It will
-1. Generate a key id by take the sha256 hash of the public key used to sign attestations
+```rego
+package commandrun
+
+deny[msg] {
+    input.exitcode != 0
+    msg := "exitcode not 0"
+}
+
+deny[msg] {
+    input.cmd[2] != "echo 'hello' > hello.txt"
+    msg := "cmd not correct"
+}
+```
+
+Use the following script for templating the policy.  It will
+1. Generate a key id by taking the sha256 hash of the public key used to sign attestations
 2. Base64 encode the PEM encoded public key
 3. Base64 encode the rego policy
 4. Replace the {{KEYID}} and {{KEY}} placeholders in the template with the generated values
-5. Transofrm the YAML into JSON
+5. Transform the YAML into JSON
 
 
 ```sh
@@ -69,7 +84,7 @@ Now we are ready to generate attestations. (hint, make sure hello.txt is not in 
 View the attestation
 `cat test-attestation.json | jq -r .payload | base64 -d | jq .`
 
-Now let's verify the output file `hello.txt` meets our policy.  Notice we use the corresponsing public key to validate our policy is trusted.
+Now let's verify the output file `hello.txt` meets our policy.  Notice we use the corresponding public key to validate our policy is trusted.
 `witness verify -k policypublic.pem -p policy.signed.json -a build-attestation.json -f hello.txt`
 
 The output should look something like:
@@ -79,14 +94,16 @@ INFO    Evidence:
 INFO    0: sha256:a2dccb3ce3b54310cfec2d329493fa62dbc24d3c4c5b961efe7d030704bded42  build-attestation.json
 ```
 
-Now lets create a seccond attestation, this time we will create something we expect to fail policy verification.
+Now lets create a second attestation. This time we will create something we expect to fail the policy verification.  Notice we change to product name to `hello.fail.txt`
 
 `witness run -s build -k buildkey.pem -o build-attestation.json -- bash -c "echo 'hello' > hello.fail.txt"`
 `witness verify -k policypublic.pem -p policy.signed.json -a build-attestation.json -f hello.failtxt`
+
+
+The binary fails our verification since we expect it the output to be `hello.txt`, not `hello.fail.txt` The output should look something like:
 
 ```
 ERROR   failed to verify policy: failed to verify policy: attestations for step build could not be used due to:
 policy was denied due to:
 cmd not correct 
 ```
-
