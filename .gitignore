@@ -1,0 +1,9 @@
+build-attestation.json
+buildkey.pem
+buildpublic.pem
+hello.fail.txt
+policy.signed.json
+policy.json
+policy.tmp.yaml
+policykey.pem
+policypublic.pem

@@ -1,0 +1,18 @@
+expires: "2035-12-17T23:57:40-05:00"
+steps:
+  build:
+      name: build
+      attestations:
+        - type: https://witness.dev/attestations/material/v0.1
+        - type: https://witness.dev/attestations/product/v0.1
+        - type: https://witness.dev/attestations/command-run/v0.1
+          regoPolicies:
+          - name:  "exitcode"
+            module: "{{CMD_MODULE}}"
+      functionaries:
+        - type: publickey
+          publickeyid: "{{KEYID}}"
+publickeys:
+  "{{KEYID}}":
+    keyid: "{{KEYID}}"
+    key:
