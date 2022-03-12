@@ -38,7 +38,7 @@ publickeys:
 
 ```
 
-### Create a rego policy to ensure that the command is rwhat we expect it to be
+### Create a rego policy to ensure that the command is what we expect it to be
 
 ```rego
 package commandrun
@@ -102,7 +102,7 @@ bash -c "echo 'hello' > hello.txt"
 
 View the attestation
 ```sh
-cat test-attestation.json | jq -r .payload | base64 -d | jq .
+cat build-attestation.json | jq -r .payload | base64 -d | jq .
 ```
 
 ### Verify the Attestation
