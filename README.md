@@ -82,10 +82,11 @@ Extract the public key
 
 `openssl rsa -in policykey.pem -outform PEM -pubout -out policypublic.pem`
 
-Sign the policy
+### Sign the policy
 
 `witness sign -k policykey.pem -f policy.json -o policy.signed.json`
 
+### Create the attestations
 
 Now we are ready to generate attestations. (hint, make sure hello.txt is not in the current directory)
 
@@ -98,6 +99,8 @@ View the attestation
 ```sh
 cat test-attestation.json | jq -r .payload | base64 -d | jq .
 ```
+
+### Verify the Attestation
 
 Now let's verify the output file `hello.txt` meets our policy.  Notice we use the corresponding public key to validate our policy is trusted.
 
