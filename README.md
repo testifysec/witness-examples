@@ -68,24 +68,36 @@ yq e -j policy.tmp.yaml > policy.json
 Create a keypair to sign the policy with
 
 Create a keypair
+
 `openssl genrsa -out policykey.pem 2048`
 
 Extract the public key
+
 `openssl rsa -in policykey.pem -outform PEM -pubout -out policypublic.pem`
 
 Sign the policy
+
 `witness sign -k policykey.pem -f policy.json -o policy.signed.json`
 
 
 Now we are ready to generate attestations. (hint, make sure hello.txt is not in the current directory)
 
-`witness run -s build -k buildkey.pem -o build-attestation.json -- bash -c "echo 'hello' > hello.txt"`
+```sh
+witness run -s build -k buildkey.pem -o build-attestation.json -- \
+bash -c "echo 'hello' > hello.txt"
+```
 
 View the attestation
-`cat test-attestation.json | jq -r .payload | base64 -d | jq .`
+```sh
+cat test-attestation.json | jq -r .payload | base64 -d | jq .
+```
 
 Now let's verify the output file `hello.txt` meets our policy.  Notice we use the corresponding public key to validate our policy is trusted.
-`witness verify -k policypublic.pem -p policy.signed.json -a build-attestation.json -f hello.txt`
+
+```sh
+witness verify -k policypublic.pem -p policy.signed.json -a \
+build-attestation.json -f hello.txt
+```
 
 The output should look something like:
 ```
