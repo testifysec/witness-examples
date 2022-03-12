@@ -97,6 +97,8 @@ INFO    0: sha256:a2dccb3ce3b54310cfec2d329493fa62dbc24d3c4c5b961efe7d030704bded
 Now lets create a second attestation. This time we will create something we expect to fail the policy verification.  Notice we change to product name to `hello.fail.txt`
 
 `witness run -s build -k buildkey.pem -o build-attestation.json -- bash -c "echo 'hello' > hello.fail.txt"`
+
+
 `witness verify -k policypublic.pem -p policy.signed.json -a build-attestation.json -f hello.failtxt`
 
 
