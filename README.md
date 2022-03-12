@@ -1,13 +1,15 @@
 # Basic Witness Demo
 
 Create a keypair
+
 `openssl genrsa -out buildkey.pem 2048`
 
 Extract the public key
+
 `openssl rsa -in buildkey.pem -outform PEM -pubout -out buildpublic.pem`
 
 
-Create the policy Template
+Create the policy template:
 
 ```yaml
 expires: "2035-12-17T23:57:40-05:00"
