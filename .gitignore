@@ -7,3 +7,4 @@ policy.json
 policy.tmp.yaml
 policykey.pem
 policypublic.pem
+.dccache
