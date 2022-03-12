@@ -99,7 +99,7 @@ Now lets create a second attestation. This time we will create something we expe
 `witness run -s build -k buildkey.pem -o build-attestation.json -- bash -c "echo 'hello' > hello.fail.txt"`
 
 
-`witness verify -k policypublic.pem -p policy.signed.json -a build-attestation.json -f hello.failtxt`
+`witness verify -k policypublic.pem -p policy.signed.json -a build-attestation.json -f hello.fail.txt`
 
 
 The binary fails our verification since we expect it the output to be `hello.txt`, not `hello.fail.txt` The output should look something like:
