@@ -1,6 +1,6 @@
 # Basic Witness Demo
 
-Create a keypair
+### Create a keypair to sign the attestations with
 
 `openssl genrsa -out buildkey.pem 2048`
 
@@ -9,7 +9,7 @@ Extract the public key
 `openssl rsa -in buildkey.pem -outform PEM -pubout -out buildpublic.pem`
 
 
-Create the policy template:
+### Create the policy template:
 
 ```yaml
 expires: "2035-12-17T23:57:40-05:00"
@@ -33,7 +33,7 @@ publickeys:
 
 ```
 
-Create a rego policy to ensure that the command is rwhat we expect it to be
+### Create a rego policy to ensure that the command is rwhat we expect it to be
 
 ```rego
 package commandrun
@@ -48,6 +48,8 @@ deny[msg] {
     msg := "cmd not correct"
 }
 ```
+
+### Template the policy
 
 Use the following script for templating the policy.  It will
 1. Generate a key id by taking the sha256 hash of the public key used to sign attestations
@@ -70,7 +72,7 @@ sed -i "s/{{CMD_MODULE}}/$cmd_b64/g" policy.tmp.yaml
 yq e -j policy.tmp.yaml > policy.json
 ```
 
-Create a keypair to sign the policy with
+### Create a keypair to sign the policy with
 
 Create a keypair
 
