@@ -1,5 +1,10 @@
 # Basic Witness Demo
 
+### Download the latest witness binary from the github repo
+
+[https://github.com/testifysec/witness/releases](https://github.com/testifysec/witness/releases)
+
+
 ### Create a keypair to sign the attestations with
 
 `openssl genrsa -out buildkey.pem 2048`
