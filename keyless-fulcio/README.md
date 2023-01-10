@@ -30,7 +30,8 @@ The Fulcio Root CA is used to verify the Fulcio certificate chain it is availabl
 
 Create a policy file that defines the attestations that are required for a build step to be considered valid.  Add the Fulcio Root CA to the policy file and as a functionary on the build step.  You can define constraints on the certificate that is used to sign the build step.  In this example we are requiring that the certificate be signed by the Fulcio Root CA and that the user that signed the certificate is `cole@testifysec.com`.  The Fulcio API provides both a root certificate and an intermidate in the bundle.  The Witness API requires that the root and the intermidate be included in the policy file.  Additionally, since Fulcio's certs are short lived we must also include a root of trust for the Timestamp.  Future versions of Witness will support retrieving and verifying the embeded timestamp in the certificate provided by Fulcio.
 
-Make sure you replace my email with one that is associated with the account you used to sign the attestation.
+- Make sure you replace my email with one that is associated with the account you used to sign the attestation.
+- Notice the name and identifier in the `steps` section of the policy file.  This corresponds with the `step` name indicated in the `witness run` command and in the `payload` section of the attestation.
 
 ```
 {
@@ -89,11 +90,11 @@ openssl pkey -in testkey.pem -pubout > testpub.pem
 Sign the policy file with the keypair.
 
 ```
-witness sign -k testkey.pem -p testpolicy.json -o policy-signed.json
+witness sign -k testkey.pem -o policy-signed.json -f policy.json
 ```
 
 ### Verify the attestation
 
 ```
-witness verify -p policy-signed.json -a test.json
+witness verify -p policy-signed.json -a test.json -k testpub.pem -f test.txt
 ```
