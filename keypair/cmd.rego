@@ -1,8 +1,8 @@
 package commandrun
 
 deny[msg] {
-	input.exitcode != 0
-	msg := "exitcode not 0"
+    input.exitcode != 0
+    msg := "exitcode not 0"
 }
 
 deny[msg] {
