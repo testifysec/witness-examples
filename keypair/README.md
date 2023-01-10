@@ -116,7 +116,7 @@ pubb64=`cat testpub.pem | base64 -w 0` && sed -i "s/{{B64_PUBLIC_KEY}}/$pubb64/g
 Keep this key safe, its owner will control the policy gates.
 
 ```
-witness sign -f policy.json --key testkey.pem --outfile policy-signed.json
+witness sign -k testkey.pem -o policy-signed.json -f policy.json
 ```
 
 ### Verify the Binary Meets Policy Requirements
@@ -126,6 +126,6 @@ witness sign -f policy.json --key testkey.pem --outfile policy-signed.json
 > for policies that require multiple steps, multiple attestations are required.
 
 ```
-witness verify -f testapp -a test-att.json -p policy-signed.json -k testpub.pem
+witness verify -p policy-signed.json -a test.json -k testpub.pem -f test.txt
 ```
 
