@@ -1,4 +1,4 @@
-# Prerequisite needed macOS packages
+# Prerequisites for macOS
 If you are working through this example on macOS you will need to install the following packages using a package manager such as `brew`. 
 If necessary, you can download and install brew from https://brew.sh and follow the installation instructions. The are slight differences of certain packages on macOS and Linux.  
 
