@@ -1,0 +1,5 @@
+*.pem
+test.txt
+test.json
+policy.json
+policy-signed.json
