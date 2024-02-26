@@ -10,7 +10,7 @@ In this scenario an attacker has compromised the builder and is observing proces
 off. Once the attacker observes a build of the targeted software the attacker injects their malicious code during the
 compile process.
 
-While on SolarWinds is built on Windows the same style of attack can be used on Linux hosts. In this example we will
+While SolarWinds is built on Windows the same style of attack can be used on Linux hosts. In this example we will
 mimic this attack vector with a tool we've developed named [SolarSploit](https://github.com/testifysec/solarsploit/).
 This tool watches for the go compiler to start, attaches to the compiler as a debugger, and modifies the source being
 compiled to inject a malicious function into the resulting binary.
