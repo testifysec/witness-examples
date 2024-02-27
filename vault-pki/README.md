@@ -36,7 +36,7 @@ export VAULT_ROOT=(curl -s -H "X-Vault-Namespace: $VAULT_NAMESPACE" \
 
 ### Create a Witness Policy
 
-Next we need to create a witness policy that includes a step whose functionary must come from our Vault instance. Make sure to replace the vault-pki root certificate with the contents of the `VAULT_ROOT` variable, as well as the common name with a common name allowed by your Vault role. Save this as `policy.json`.
+Next we need to create a Witness policy that includes a step whose functionary must come from our Vault instance. Make sure to replace the vault-pki root certificate with the contents of the `VAULT_ROOT` variable, as well as the common name with a common name allowed by your Vault role. Save this as `policy.json`.
 
 ```json
 {
